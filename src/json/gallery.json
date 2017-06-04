@@ -1,12 +1,12 @@
 var gallery = [
     {
-        "path": "res/placeholder.jpg",
+        "path": "res/placeholder.png",
         "text": "placeholder1"
     },{
-        "path": "res/placeholder.jpg",
+        "path": "res/placeholder.png",
         "text": "placeholder2"
     },{
-        "path": "res/placeholder.jpg",
+        "path": "res/placeholder.png",
         "text": "placeholder3"
     }
 ]
