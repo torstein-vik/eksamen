@@ -1,0 +1,302 @@
+/** {
+    --theme1: #4C4;
+    --theme1active: #3A3;
+    --header-col: aliceblue;
+    --usernav-col: #777;
+    --usernav-col-active: #999;
+}*/
+
+* {
+    --theme1: #CCC;
+    --theme1active: #AAA;
+    --header-col: #DDB;
+    --usernav-col: #777;
+    --usernav-col-active: #999;
+}
+
+html, body{
+    font-family: 'Verdana';
+    font-family: 'Open Sans', sans-serif;
+
+    margin: 0;
+    height: 100%;
+
+    color: black;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+a{
+    color: black;
+}
+
+#header{
+    position: relative;
+
+    width: 100%;
+    background-color: var(--header-col);
+
+    flex: 0 1 auto;
+
+    line-height: 2;
+
+    box-shadow: 0 0 10px darkslategray;
+
+    z-index: 1000;
+}
+
+#global{
+    flex: 1 1 auto;
+
+
+    padding-bottom: 20px;
+
+    border-radius: 3px;
+
+
+    background-color: white;
+
+    box-shadow: 0 0 10px darkslategray;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    height: calc(100vh - 20px - 20px - 20vh);
+}
+
+#global::-webkit-scrollbar {
+    width: 6px;
+    padding-top: 5px;
+}
+
+#global::-webkit-scrollbar-thumb {
+    background: var(--theme1);
+    border-radius: 3px;
+}
+
+#global::-webkit-scrollbar-thumb:hover{
+    background: var(--theme1active);
+}
+
+h1{
+    font-family: Oxygen;
+    font-size: 200%;
+    font-weight: 100;
+
+    padding: 10px 0;
+
+    text-align: center;
+    width:100%;
+    margin: 0;
+    line-height: 1;
+}
+
+#usernav{
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    display: flex;
+
+}
+
+#usernav > div{
+    background-color: var(--usernav-col);
+    color: white;
+    padding: 10px;
+
+    box-shadow: 0 0 10px gray;
+}
+
+#usernav > div:first-child{
+    border-bottom-left-radius: 25px;
+}
+
+#usernav > div:hover{
+    background-color: var(--usernav-col-active);
+    cursor: pointer;
+}
+
+#content{
+    padding: 80px;
+    padding-top: 0;
+
+    line-height: 2;
+
+    background-color: white;
+}
+
+.selection{
+    display: flex;
+    justify-content: left;
+    flex-flow: row wrap;
+
+    margin-bottom: 10px;
+}
+
+#subject{
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#subject > div{
+    max-width: 200px;
+}
+
+.selection > div{
+    margin: 0 10px 0 10px;
+    text-align: center;
+
+    width: 28%;
+    margin-bottom: 10px;
+
+    cursor: pointer;
+
+    background-color: var(--theme1);
+    box-shadow: 0 0 2px darkslategray;
+
+    transition: background-color .5s;
+}
+
+.selection > div:hover, .selection > div.active{
+    background-color: var(--theme1active);
+}
+
+.selectionelement{
+    margin: 10px auto;
+    box-shadow: 0px 1px 3px darkslategray;
+    width: calc(100% - 40px);
+
+    padding: 20px;
+
+    overflow: hidden;
+}
+
+.selectionelement[for='subject']{
+    max-width: 720px;
+}
+
+@media (max-width: 720px){
+    .selectionelement[for='subject']{
+        margin: 0 0;
+        box-shadow: none;
+
+        padding: 20px;
+
+        overflow: hidden;
+    }
+
+    #content{
+        padding: 0;
+
+        line-height: 2;
+
+        background-color: white;
+    }
+}
+
+@media (max-width: 500px){
+    h1{
+        text-align: left;
+        margin-left: 10px;
+    }
+
+    #subject > div{
+        margin: 0 0;
+    }
+}
+
+modal{
+
+    position: fixed;
+    left: 0;
+    right: 0;
+
+    top: 150vh;
+
+    min-width: 400px;
+    width: 40%;
+    background-color: white;
+
+    margin: 0 auto;
+
+
+    z-index: 100000;
+
+    border-radius: 25px;
+    padding: 25px;
+
+    box-shadow: 0 0 2px gray;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+modalheader{
+    display: flex;
+    justify-content: space-between;
+
+
+
+    background-color: var(--theme1);
+    z-index: 100001;
+
+    margin: -25px -25px 0 -25px;
+
+    border-radius: 25px 25px 0 0;
+
+    padding: 10px 20px 10px 20px;
+
+    margin-bottom: 10px;
+
+    box-shadow: 0 0 2px var(--theme1);
+}
+
+modalheader > h2{
+    margin: 0;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: 100;
+}
+
+modalheader > div{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+@keyframes modalcrossfade{
+    from {color: black;}
+    50% {color: var(--theme1);}
+    to {color: white;}
+}
+
+
+modalheader > div:hover{
+    animation: modalcrossfade 250ms forwards;
+}
+
+input, textarea, select{
+    width: 100%;
+    padding: 10px;
+    font-size: 110%;
+    margin-top: 10px;
+}
+
+input[type='submit']{
+    cursor: pointer;
+}
+
+
+#slide{
+    width: 100%;
+    height: auto;
+}
+
+#slide_text{
+    text-align: center;
+}
+
+
