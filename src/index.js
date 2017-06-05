@@ -62,8 +62,6 @@ function loadLogin(){
             });
 
 
-            $("#completepurchase-loginmessage").hide();
-            $("#completepurchase").show();
         } else {
             $("#usernav").html(`
                 <div id="loginbutton" class="modalbutton" for="login-modal"> Logg inn </div>
@@ -73,8 +71,6 @@ function loadLogin(){
             initModalSystemHandlers();
             initLoginSystem();
             initRegisterSystem();
-            $("#completepurchase-loginmessage").show();
-            $("#completepurchase").hide();
         }
 
         def.resolve();
