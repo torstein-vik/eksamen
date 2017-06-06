@@ -1,33 +1,33 @@
 
-// init-function
-$(function(){
 
-    // Load all the products into the DOM and hide all tabs
-    load().done(() => {
-        // Hide all tabs
-        $(".selectionelement").hide();
+// Load everything, and then do the following
+load().done(() => {
+    // Hide all tabs
+    $(".selectionelement").hide();
 
-        // Initialises the system responsible for tabs
-        initSelectionSystem();
+    // Initialises the system responsible for tabs
+    initSelectionSystem();
 
-        initModalSystem();
+    initModalSystem();
 
-        // Load the specified URL
-        loadURL(url);
-
-
-        // Show the previously hidden body (this is to prevent ugly loading)
-        $("body").show();
-    });
+    // Load the specified URL
+    loadURL(url);
 
 
     // Start the slideshow
     startSlideshow();
 
+    // Show the previously hidden body (this is to prevent ugly loading)
+    $("body").show();
 });
 
+
 function load(){
-    return $.when(loadLogin(), loadApartments());
+    DOMLoaded = new $.Deferred(function(){
+        $(this.resolve);
+    });
+
+    return DOMLoaded.then(loadApartments).then(loadLogin);
 }
 
 function loadApartments(){
@@ -79,7 +79,41 @@ function loadApartments(){
             div.append("<br><br>");
             div.append("<div class='selection' id='order' group='order'> <div style='width: 100%' for='reserve-"+apartment.id+"'>Reservér</div> </div>");
 
-            var order = $("<div class='selectionelement' id='reserve-"+apartment.id+"' for='order'> heu </div>");
+            var order = $("<div class='selectionelement' id='reserve-"+apartment.id+"' for='order'> </div>");
+
+            var order_form = $("<form>");
+
+            var date_start = $("<input type='date' id='date_start' required style='margin-bottom: 10px'>");
+            var date_end   = $("<input type='date' id='date_end'   required style='margin-bottom: 10px'>");
+            var price      = $("<span>Pris: -</span>");
+
+            order_form.append("Startdato:");
+            order_form.append(date_start);
+            order_form.append("Sluttdato:");
+            order_form.append(date_end);
+            order_form.append(price);
+            order_form.append("<input type='submit' value='Bestill!'>");
+
+            calculate_price = () => {
+                var start = date_start[0].valueAsDate;
+                var end   = date_end[0].valueAsDate;
+
+                var timediff = end.getTime() - start.getTime();
+                var daydiff = Math.ceil(timediff / (1000 * 3600 * 24));
+
+                if(daydiff > 0){
+                    price.html("Pris: " + daydiff * apartment.price + "kr");
+                }
+            };
+
+            date_start.on('input', calculate_price);
+            date_end.on('input', calculate_price);
+
+            order_form.on('submit', (e) => {
+                e.preventDefault();
+            });
+
+            order.append(order_form);
 
             div.append(order);
 
