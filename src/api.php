@@ -298,7 +298,7 @@
 
         $userid = $_SESSION["userid"];
 
-        foreach(["date_start", "date_end"] as $index){
+        foreach(["date_start", "date_end", "apartmentid"] as $index){
             if(!(isset($_POST[$index]) && $_POST[$index] != "")){
 
                 ?>
@@ -324,7 +324,7 @@
             return;
         }
 
-        if(!($date_start < time())){
+        if($date_start < time()){
             ?>
             {
                 "success": false,
@@ -335,11 +335,31 @@
         }
 
 
+        $date_start = date("Y-m-d h:m:s", $date_start);
+        $date_end   = date("Y-m-d h:m:s", $date_end);
 
+        $insert = $conn->query("INSERT INTO reservations (apartmentid, userid, date_start, date_end) VALUES ('$apartmentid', '$userid', '$date_start', '$date_end')");
+
+        if($insert){
+            ?>
+            {
+                "success": true
+            }
+            <?php
+            return;
+        } else {
+            ?>
+            {
+                "success": false,
+                "message": "Ukjent feil - <?php echo $conn->error;?>"
+            }
+            <?php
+            return;
+        }
     } else if ($type == "reservations"){
         $id = $conn->escape_string($_GET["id"]);
 
-        $data = $conn->query("SELECT * FROM reservations WHERE apartmentid='$id'");
+        $data = $conn->query("SELECT UNIX_TIMESTAMP(date_start), UNIX_TIMESTAMP(date_end) FROM reservations WHERE apartmentid='$id'");
 
         ?>
         {
@@ -356,8 +376,8 @@
 
                         echo "{";
 
-                        echo '"start": "'.$reservation["date_start"].'",';
-                        echo '"end": "'.  $reservation["date_end"]  .'"';
+                        echo '"start": "'.$reservation["UNIX_TIMESTAMP(date_start)"].'",';
+                        echo '"end": "'.  $reservation["UNIX_TIMESTAMP(date_end)"]  .'"';
 
                         echo "}";
                     }
