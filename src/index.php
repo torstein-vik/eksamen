@@ -55,6 +55,8 @@
                 </div>
                 <div id="reserve" for="subject" class="selectionelement">
 
+                    <p style='margin-bottom:20px; text-align:center'>Du må registrere deg eller logge inn for å kunne reserve.</p>
+
                     <div class="selection" id="apartments" group="apartments">
 
                     </div>
