@@ -3,6 +3,7 @@
         {
             "number": 101,
             "featured": 0,
+            "price": 100,
             "description": "Fantastisk utsikt over fjorden",
             "images": [
                 {
@@ -18,6 +19,7 @@
         {
             "number": 202,
             "featured": 1,
+            "price": 200,
             "description": "Fantastisk utsikt over fjorden 2",
             "images": [
                 {
@@ -33,6 +35,7 @@
         {
             "number": 303,
             "featured": 1,
+            "price": 300,
             "description": "Fantastisk utsikt over fjorden 3",
             "images": [
                 {
@@ -48,6 +51,7 @@
         {
             "number": 404,
             "featured": 1,
+            "price": 400,
             "description": "Fantastisk utsikt over fjorden 4",
             "images": [
                 {

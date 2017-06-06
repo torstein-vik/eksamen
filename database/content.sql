@@ -18,11 +18,11 @@ ALTER TABLE `apartments` AUTO_INCREMENT = 1;
 ALTER TABLE `apartment_images` AUTO_INCREMENT = 1;
 
 
-INSERT INTO apartments (apartmentnumber, description, featured_img) VALUES
-('101', 'Fantastisk utsikt over fjorden', '1'),
-('202', 'Fantastisk utsikt over fjorden 2', '4'),
-('303', 'Fantastisk utsikt over fjorden 3', '6'),
-('404', 'Fantastisk utsikt over fjorden 4', '8');
+INSERT INTO apartments (apartmentnumber, description, price, featured_img) VALUES
+('101', 'Fantastisk utsikt over fjorden', '100', '1'),
+('202', 'Fantastisk utsikt over fjorden 2', '200', '4'),
+('303', 'Fantastisk utsikt over fjorden 3', '300', '6'),
+('404', 'Fantastisk utsikt over fjorden 4', '400', '8');
 
 
 INSERT INTO apartment_images (apartmentid, path, imagetext) VALUES

@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `apartments` (
   `apartmentid` INT NOT NULL AUTO_INCREMENT,
   `apartmentnumber` CHAR(3) NOT NULL,
   `description` TEXT NOT NULL,
+  `price` FLOAT NOT NULL,
   `featured_img` INT NOT NULL,
   PRIMARY KEY (`apartmentid`),
   FOREIGN KEY (`featured_img`)

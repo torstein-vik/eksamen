@@ -35,7 +35,7 @@ fs.readFile('content.json', 'utf8', function (err, json) {
     data.apartments.forEach((apartment, index) => {
         apartmentid++;
 
-        apartments.push([apartment.number, apartment.description, apartment.featured + current_img_id + 1]);
+        apartments.push([apartment.number, apartment.description, apartment.price, apartment.featured + current_img_id + 1]);
         apartment.images.forEach((image) => {
             current_img_id++;
 
@@ -43,9 +43,9 @@ fs.readFile('content.json', 'utf8', function (err, json) {
         });
     });
 
-    sql += "INSERT INTO apartments (apartmentnumber, description, featured_img) VALUES\n";
-    apartments.forEach(([number, description, featured], index, arr) => {
-        sql += `('${number}', '${description}', '${featured}')${index == arr.length - 1 ? ';' : ','}\n`;
+    sql += "INSERT INTO apartments (apartmentnumber, description, price, featured_img) VALUES\n";
+    apartments.forEach(([number, description, price, featured], index, arr) => {
+        sql += `('${number}', '${description}', '${price}', '${featured}')${index == arr.length - 1 ? ';' : ','}\n`;
     });
     sql +="\n\n";
 
