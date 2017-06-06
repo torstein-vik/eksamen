@@ -1,12 +1,12 @@
 var gallery = [
     {
-        "path": "res/placeholder.png",
-        "text": "placeholder1"
+        "path": "res/apartment1a.jpg",
+        "text": "Leilighet 101"
     },{
-        "path": "res/placeholder.png",
-        "text": "placeholder2"
+        "path": "res/apartment2b.jpg",
+        "text": "Leilighet 102"
     },{
-        "path": "res/placeholder.png",
-        "text": "placeholder3"
+        "path": "res/apartment3c.jpg",
+        "text": "Leilighet 201"
     }
 ]
