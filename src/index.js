@@ -27,7 +27,27 @@ function load(){
         $(this.resolve);
     });
 
-    return DOMLoaded.then(loadApartments).then(loadLogin);
+    return DOMLoaded.then(loadApartments).then(loadLogin).then(loadUserData);
+}
+
+function loadUserData(){
+    var def = new $.Deferred();
+
+    $.ajax({
+        url:"/api?type=userreservations"
+    }).done((json) => {
+        var result = JSON.parse(json);
+
+        $("#reservations").html("");
+
+        if(result.success){
+
+
+
+        } else {
+            $("#reservations").html("Du må være innlogget for å se dine reservasjoner.");
+        }
+    });
 }
 
 function loadApartments(){
@@ -181,6 +201,8 @@ function loadApartments(){
 function loadLogin(){
     var def = new $.Deferred();
 
+    loadUserData();
+
     $.ajax({
         url: "api?type=checklogin"
     }).done((json) => {
@@ -202,6 +224,7 @@ function loadLogin(){
                         if(result.status == 1){
 
                             loadLogin();
+                            loadUserData();
                         } else {
                             alert("Error when logging out. Please try again");
                         }
@@ -219,6 +242,7 @@ function loadLogin(){
             initModalSystemHandlers();
             initLoginSystem();
             initRegisterSystem();
+            loadUserData();
         }
 
         def.resolve();
