@@ -238,9 +238,10 @@
 
                         echo "{";
 
-                        echo '"id": "'.          addslashes($apartment["apartmentid"]).'",';
+                        echo '"id": "'.          addslashes($apartment["apartmentid"]).    '",';
                         echo '"number": "'.      addslashes($apartment["apartmentnumber"]).'",';
                         echo '"description": "'. addslashes($apartment["description"]).    '",';
+                        echo '"price": "'.       addslashes($apartment["price"]).          '",';
                         echo '"featured_img": "'.addslashes($apartment["featured_img"]).   '",';
 
                         echo '"images": [';

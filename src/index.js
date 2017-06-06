@@ -51,6 +51,7 @@ function loadApartments(){
             div.append("<div id='main-image'><img src='/api?type=image&id="+apartment.featured_img+"'></div>");
 
             div.append("<p> "+apartment.description+" </p>");
+            div.append("<p> Pris: "+apartment.price+"kr per natt </p>");
 
             div.append("<h4> Bilder </h4>");
 
