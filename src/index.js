@@ -75,6 +75,13 @@ function loadApartments(){
                 });
             });
 
+            div.append("<br><br>");
+            div.append("<div class='selection' id='order' group='order'> <div style='width: 100%' for='reserve-"+apartment.id+"'>Reservér</div> </div>");
+
+            var order = $("<div class='selectionelement' id='reserve-"+apartment.id+"' for='order'> heu </div>");
+
+            div.append(order);
+
             $("#reserve").append(div);
 
             $("#apartments").append("<div for='apartment"+apartment.id+"'> <img src='/api?type=image&id="+apartment.featured_img+"'> Leilighet "+apartment.number+" </div>");
