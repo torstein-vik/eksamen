@@ -414,13 +414,13 @@
 
         ?>
         {
-            "success": true
+            "success": true,
             "userdata": {
                 <?php
                 echo '"phone": "'.addslashes($user_data["telefonnummer"]).'",';
-                echo '"address": "'.addslashes($user_data["address"]." ".$user_data["postnummer"]." ".$user_data["poststed"]).'",';
+                echo '"address": "'.addslashes($user_data["address"]." ".$user_data["postnummer"]." ".$user_data["poststed"]).'"';
                 ?>
-            }
+            },
             "reservations":[
                 <?php
                     $is_first_reservation = true;
