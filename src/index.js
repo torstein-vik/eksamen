@@ -98,11 +98,17 @@ function loadApartments(){
                 var start = date_start[0].valueAsDate;
                 var end   = date_end[0].valueAsDate;
 
-                var timediff = end.getTime() - start.getTime();
-                var daydiff = Math.ceil(timediff / (1000 * 3600 * 24));
+                if(start != null && end != null){
+                    var timediff = end.getTime() - start.getTime();
+                    var daydiff = Math.ceil(timediff / (1000 * 3600 * 24));
 
-                if(daydiff > 0){
-                    price.html("Pris: " + daydiff * apartment.price + "kr");
+                    if(daydiff > 0){
+                        price.html("Pris: " + daydiff * apartment.price + "kr");
+                    } else {
+                        price.html("Pris: -");
+                    }
+                } else {
+                    price.html("Pris: -");
                 }
             };
 
@@ -111,6 +117,23 @@ function loadApartments(){
 
             order_form.on('submit', (e) => {
                 e.preventDefault();
+
+                $.ajax({
+                    url: "/api?type=reserve",
+                    method: "POST",
+                    data: {
+                        date_start: date_start[0].valueAsDate,
+                        date_end:   date_end[0].valueAsDate
+                    }
+                }).done((json) => {
+                    var result = JSON.parse(json);
+
+                    if (result.success){
+                        $("#order > *[for='reserve-"+apartment.id+"']").click();
+                    } else {
+                        alert(result.message);
+                    }
+                });
             });
 
             order.append(order_form);
