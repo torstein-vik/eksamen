@@ -50,7 +50,7 @@
                     <img id="slide">
                     <div id="slide_text"></div><p><br>
 
-                    Tekst
+                    Trenger du en pause fra det hektiske bylivet? Her hos volsdalspause kan du få deg en slik pause - i Volsdalen! Registrer deg, og reserver alle de periodene du vil! Vi kontakter deg etterpå for å få bekreftet bestillingen.
 
                 </div>
                 <div id="reserve" for="subject" class="selectionelement">
