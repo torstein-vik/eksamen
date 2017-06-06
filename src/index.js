@@ -43,6 +43,7 @@ function loadApartments(){
         result.apartments.forEach((apartment, index) => {
 
             var imageDeferreds = [];
+            var reservationDeferred = new $.Deferred();
 
             var div = $("<div id='apartment"+apartment.id+"' for='apartments' class='selectionelement'>");
 
@@ -139,13 +140,34 @@ function loadApartments(){
 
             order.append(order_form);
 
+            order.append("<h4> Tidligere reservasjoner: </h4>")
+
+            $.ajax({
+                url: "api?type=reservations&id="+apartment.id
+            }).done((json) => {
+                var result = JSON.parse(json);
+
+                if(result.reservations.length == 0){
+                    order.append("Det er ingen reservasjoner på denne leiligheten!");
+                } else {
+                    result.reservations.forEach((reservation) => {
+                        var start = new Date(reservation.start * 1000).toISOString().substring(0, 10);
+                        var end   = new Date(reservation.end * 1000).toISOString().substring(0, 10);
+
+                        order.append("Fra " + start + " til " + end + "<br>");
+                    });
+                }
+
+                reservationDeferred.resolve();
+            });
+
             div.append(order);
 
             $("#reserve").append(div);
 
             $("#apartments").append("<div for='apartment"+apartment.id+"'> <img src='/api?type=image&id="+apartment.featured_img+"'> Leilighet "+apartment.number+" </div>");
 
-            apartmentDeferreds[index] = $.when.apply($, imageDeferreds);
+            apartmentDeferreds[index] = $.when.apply($, [reservationDeferred].concat(imageDeferreds));
         });
 
         $.when.apply($, apartmentDeferreds).done(() => {
