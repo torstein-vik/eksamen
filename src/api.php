@@ -223,9 +223,9 @@
 
                         echo "{";
 
-                        echo "'number': '".$apartment["apartmentnumber"]."',";
-                        echo "'description': '".$apartment["description"]."',";
-                        echo "'featured_img': '".$apartment["featured_img"]."',";
+                        echo "'number': '".addslashes($apartment["apartmentnumber"])."',";
+                        echo "'description': '".addslashes($apartment["description"])."',";
+                        echo "'featured_img': '".addslashes($apartment["featured_img"])."',";
 
                         echo "'images': [";
 
