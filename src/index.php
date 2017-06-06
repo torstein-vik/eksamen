@@ -13,8 +13,8 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Oxygen"    rel="stylesheet" type="text/css">
 
-        <link rel="stylesheet" href="index.css"/>
-        <link rel="icon" href="res/logo_small.ico"/>
+        <link rel="stylesheet" href="style"/>
+        <link rel="icon" href="res/logo.ico"/>
 
 
 
@@ -29,6 +29,7 @@
     <body style="display: none;">
         <div id="header">
 
+            <img src="res/logo.svg">
 
             <h1 class="title" id="title"> Volsdalspause </h1>
             <div id="usernav">

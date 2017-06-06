@@ -1,18 +1,22 @@
-/** {
-    --theme1: #4C4;
-    --theme1active: #3A3;
-    --header-col: aliceblue;
-    --usernav-col: #777;
-    --usernav-col-active: #999;
-}*/
 
-* {
-    --theme1: #CCC;
-    --theme1active: #AAA;
-    --header-col: #DDB;
-    --usernav-col: #777;
-    --usernav-col-active: #999;
-}
+//Colors:
+//#ffffd6 #3c493f #0c0c0c #9ee37d #145c9e
+
+
+$cream: #ffffd6;
+$gdark: #3c493f;
+$pdark: #0c0c0c;
+$llime: #9ee37d;
+$lapis: #145c9e;
+
+
+
+$theme1:             $llime;
+$theme1active:       darken($theme1, 10%);
+$header-col:         $cream;
+$usernav-col:        $gdark;
+$usernav-col-active: darken($usernav-col, 10%);
+
 
 html, body{
     font-family: 'Verdana';
@@ -37,7 +41,7 @@ a{
     position: relative;
 
     width: 100%;
-    background-color: var(--header-col);
+    background-color: $header-col;
 
     flex: 0 1 auto;
 
@@ -73,12 +77,20 @@ a{
 }
 
 #global::-webkit-scrollbar-thumb {
-    background: var(--theme1);
+    background: $theme1;
     border-radius: 3px;
 }
 
 #global::-webkit-scrollbar-thumb:hover{
-    background: var(--theme1active);
+    background: $theme1active;
+}
+
+#header > img{
+    position: absolute;
+    margin: 10px;
+
+    height: 100px;
+    width: auto;
 }
 
 h1{
@@ -104,7 +116,7 @@ h1{
 }
 
 #usernav > div{
-    background-color: var(--usernav-col);
+    background-color: $usernav-col;
     color: white;
     padding: 10px;
 
@@ -116,7 +128,7 @@ h1{
 }
 
 #usernav > div:hover{
-    background-color: var(--usernav-col-active);
+    background-color: $usernav-col-active;
     cursor: pointer;
 }
 
@@ -155,14 +167,14 @@ h1{
 
     cursor: pointer;
 
-    background-color: var(--theme1);
+    background-color: $theme1;
     box-shadow: 0 0 2px darkslategray;
 
     transition: background-color .5s;
 }
 
 .selection > div:hover, .selection > div.active{
-    background-color: var(--theme1active);
+    background-color: $theme1active;
 }
 
 .selectionelement{
@@ -179,7 +191,7 @@ h1{
     max-width: 720px;
 }
 
-@media (max-width: 720px){
+@media (max-width: 820px){
     .selectionelement[for='subject']{
         margin: 0 0;
         box-shadow: none;
@@ -196,17 +208,28 @@ h1{
 
         background-color: white;
     }
+
+    #global{
+        height: calc(100vh - 20vh);
+    }
+
+    #header > img{
+        display: none;
+    }
 }
 
-@media (max-width: 500px){
+@media (max-width: 560px){
     h1{
         text-align: left;
         margin-left: 10px;
+
+        font-size: 150%;
     }
 
     #subject > div{
         margin: 0 0;
     }
+
 }
 
 modal{
@@ -242,7 +265,7 @@ modalheader{
 
 
 
-    background-color: var(--theme1);
+    background-color: $theme1;
     z-index: 100001;
 
     margin: -25px -25px 0 -25px;
@@ -253,7 +276,7 @@ modalheader{
 
     margin-bottom: 10px;
 
-    box-shadow: 0 0 2px var(--theme1);
+    box-shadow: 0 0 2px $theme1;
 }
 
 modalheader > h2{
@@ -269,7 +292,7 @@ modalheader > div{
 
 @keyframes modalcrossfade{
     from {color: black;}
-    50% {color: var(--theme1);}
+    50% {color: $theme1;}
     to {color: white;}
 }
 
