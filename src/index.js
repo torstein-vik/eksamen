@@ -122,8 +122,9 @@ function loadApartments(){
                     url: "/api?type=reserve",
                     method: "POST",
                     data: {
-                        date_start: date_start[0].valueAsDate,
-                        date_end:   date_end[0].valueAsDate
+                        apartmentid: apartment.id,
+                        date_start:  date_start[0].valueAsDate.getTime() / 1000,
+                        date_end:    date_end[0].valueAsDate.getTime() / 1000
                     }
                 }).done((json) => {
                     var result = JSON.parse(json);
