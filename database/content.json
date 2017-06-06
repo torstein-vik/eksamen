@@ -44,6 +44,21 @@
                     "text":"Placeholder 54321"
                 }
             ]
+        },
+        {
+            "number": 404,
+            "featured": 1,
+            "description": "Fantastisk utsikt over fjorden 4",
+            "images": [
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 123456"
+                },
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 654321"
+                }
+            ]
         }
     ]
 }
