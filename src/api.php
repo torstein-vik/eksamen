@@ -447,6 +447,63 @@
             ]
         }
         <?php
+    } else if ($type == "deletereservation"){
+
+        if(!$auth){
+            ?>
+            {
+                "success": false,
+                "message": "Du må logge inn for å kunne kansellere"
+            }
+            <?php
+        }
+
+        $userid = $_SESSION["userid"];
+
+        foreach(["reservationid"] as $index){
+            if(!(isset($_POST[$index]) && $_POST[$index] != "")){
+
+                ?>
+                {
+                    "success": false,
+                    "message": "Vennligst fyll ut alle feltene"
+                }
+                <?php
+                return;
+
+            } else {
+                $$index = $conn->escape_string($_POST[$index]);
+            }
+        }
+
+        $auth_ok = $conn->query("SELECT * FROM reservations WHERE reservationid='$reservationid' AND userid='$userid'")->num_rows == 1;
+
+        if(!$auth_ok){
+            ?>
+            {
+                "success": false,
+                "message": "Du er ikke autorisert!"
+            }
+            <?php
+        }
+
+        $delete = $conn->query("DELETE FROM reservations WHERE reservationid='$reservationid' AND userid='$userid'");
+
+        if($delete){
+            ?>
+            {
+                "success": true
+            }
+            <?php
+        } else {
+            ?>
+            {
+                "success": false,
+                "message": "Ukjent feil"
+            }
+            <?php
+        }
+
     }
 
 
