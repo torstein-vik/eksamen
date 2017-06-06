@@ -396,6 +396,57 @@
             ]
         }
         <?php
+    } else if ($type == "userreservations"){
+
+        if(!$auth){
+            ?>
+            {
+                "success": false
+            }
+            <?php
+            return;
+        }
+
+        $reservation_data = $conn->query("SELECT *, UNIX_TIMESTAMP(date_start), UNIX_TIMESTAMP(date_end) FROM reservations, apartments WHERE reservations.apartmentid = apartments.apartmentid AND userid='".$_SESSION["userid"]."'");
+
+        $user_data = $conn->query("SELECT * FROM users, poststed WHERE poststed.postnummer = users.postnummer AND userid='".$_SESSION["userid"]."'")->fetch_assoc();
+
+
+        ?>
+        {
+            "success": true
+            "userdata": {
+                <?php
+                echo '"phone": "'.addslashes($user_data["telefonnummer"]).'",';
+                echo '"address": "'.addslashes($user_data["address"]." ".$user_data["postnummer"]." ".$user_data["poststed"]).'",';
+                ?>
+            }
+            "reservations":[
+                <?php
+                    $is_first_reservation = true;
+                    while($reservation = $reservation_data->fetch_assoc()){
+                        if(!$is_first_reservation){
+                            echo ",";
+                        } else {
+                            $is_first_reservation = false;
+                        }
+
+
+                        echo "{";
+
+                        echo '"reservationid": "'.  $reservation["reservationid"]             .'",';
+                        echo '"start": "'.          $reservation["UNIX_TIMESTAMP(date_start)"].'",';
+                        echo '"end": "'.            $reservation["UNIX_TIMESTAMP(date_end)"]  .'",';
+                        echo '"apartmentnumber": "'.$reservation["apartmentnumber"]           .'",';
+                        echo '"price": "'.          $reservation["price"]                     .'"';
+
+                        echo "}";
+                    }
+
+                ?>
+            ]
+        }
+        <?php
     }
 
 
