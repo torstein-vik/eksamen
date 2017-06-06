@@ -15,6 +15,11 @@ DELETE FROM \`apartments\`;
 DELETE FROM \`apartment_images\`;
 
 
+-- Reseting auto_increment
+ALTER TABLE \`apartments\` AUTO_INCREMENT = 1;
+ALTER TABLE \`apartment_images\` AUTO_INCREMENT = 1;
+
+
 `
 
 fs.readFile('content.json', 'utf8', function (err, json) {

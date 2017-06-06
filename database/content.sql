@@ -13,6 +13,11 @@ DELETE FROM `apartments`;
 DELETE FROM `apartment_images`;
 
 
+-- Reseting auto_increment
+ALTER TABLE `apartments` AUTO_INCREMENT = 1;
+ALTER TABLE `apartment_images` AUTO_INCREMENT = 1;
+
+
 INSERT INTO apartments (apartmentnumber, description, featured_img) VALUES
 ('101', 'Fantastisk utsikt over fjorden', '1'),
 ('202', 'Fantastisk utsikt over fjorden 2', '4'),
