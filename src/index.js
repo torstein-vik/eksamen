@@ -307,7 +307,7 @@ function loadURL(url){
             $("#reserve").show();
             $("#subject > div[for=reserve]").addClass("active");
             break;
-        case "cart":
+        case "reservations":
             $("#reservations").show();
             $("#subject > div[for=reservations]").addClass("active");
             break;
