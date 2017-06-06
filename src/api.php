@@ -338,6 +338,16 @@
         $date_start = date("Y-m-d h:m:s", $date_start);
         $date_end   = date("Y-m-d h:m:s", $date_end);
 
+        if($conn->query("SELECT * FROM reservations WHERE date_start <= '$date_end' AND date_end >= '$date_start'")->num_rows != 0){
+            ?>
+            {
+                "success": false,
+                "message": "Overlapp med en annen reservasjon"
+            }
+            <?php
+            return;
+        }
+
         $insert = $conn->query("INSERT INTO reservations (apartmentid, userid, date_start, date_end) VALUES ('$apartmentid', '$userid', '$date_start', '$date_end')");
 
         if($insert){
