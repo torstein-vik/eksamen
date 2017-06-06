@@ -3,64 +3,64 @@
         {
             "number": 101,
             "featured": 0,
-            "price": 100,
-            "description": "Fantastisk utsikt over fjorden",
+            "price": 499,
+            "description": "2-etasjers leilighet med kjøkken, 2 bad, stue, og 2 soverom. Vi kan love fantastisk utsikt over fjorden!",
             "images": [
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 123"
+                    "path":"res/apartment1a.jpg",
+                    "text":"Koslig kjøkken"
                 },
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 321"
+                    "path":"res/apartment1b.jpg",
+                    "text":"Moderne stue"
                 }
             ]
         },
         {
             "number": 202,
             "featured": 1,
-            "price": 200,
-            "description": "Fantastisk utsikt over fjorden 2",
+            "price": 199,
+            "description": "Koslig flat leilighet med stor stue, 1 bad, og ett soverom. Hva skal med kjøkken, sant?",
             "images": [
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 1234"
+                    "path":"res/apartment2a.jpg",
+                    "text":"Kvit sofa"
                 },
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 4321"
+                    "path":"res/apartment2b.jpg",
+                    "text":"hvitt bord med plante på"
                 }
             ]
         },
         {
             "number": 303,
-            "featured": 1,
-            "price": 300,
-            "description": "Fantastisk utsikt over fjorden 3",
+            "featured": 2,
+            "price": 999,
+            "description": "Denne store leiligheten har alt man trenger; 5 bad, 3 soverom, og kjempestor stue. I tillegg har den et skikkelig kjøkken!",
             "images": [
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 12345"
+                    "path":"res/apartment3a.jpg",
+                    "text":"Luksuriøst kjøkken"
                 },
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 54321"
+                    "path":"res/apartment3b.jpg",
+                    "text":"Dekt bord med utsikt"
+                },
+                {
+                    "path":"res/apartment3b.jpg",
+                    "text":"Den store stua"
                 }
             ]
         },
         {
             "number": 404,
-            "featured": 1,
-            "price": 400,
-            "description": "Fantastisk utsikt over fjorden 4",
+            "featured": 0,
+            "price": 99,
+            "description": "Rimelig og koslig leilighet med stue, bad, og soverom. ",
             "images": [
                 {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 123456"
-                },
-                {
-                    "path":"res/placeholder.png",
-                    "text":"Placeholder 654321"
+                    "path":"res/apartment4a.jpg",
+                    "text":"Den rimelige stua"
                 }
             ]
         }
