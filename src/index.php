@@ -37,7 +37,7 @@
 
             <div class="selection" id="subject" group="subject">
                 <div for="home">Hjem</div>
-                <div for="reserve">Reserver</div>
+                <div for="reserve">Reservér</div>
                 <div for="reservations">Mine reservasjoner</div>
             </div>
         </div>
