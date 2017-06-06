@@ -217,27 +217,36 @@
         {
             "apartments":[
                 <?php
-
+                    $is_first_apartment = true;
                     while($apartment = $apartments->fetch_assoc()){
+                        if(!$is_first_apartment){
+                            echo ",";
+                        }
+                        $is_first_apartment = false;
+
                         $images = $conn->query("SELECT apartment_imageid FROM apartment_images WHERE apartmentid='".$apartment["apartmentid"]."'");
 
                         echo "{";
 
-                        echo "'number': '".addslashes($apartment["apartmentnumber"])."',";
-                        echo "'description': '".addslashes($apartment["description"])."',";
-                        echo "'featured_img': '".addslashes($apartment["featured_img"])."',";
+                        echo '"number": "'.      addslashes($apartment["apartmentnumber"]).'",';
+                        echo '"description": "'. addslashes($apartment["description"]).    '",';
+                        echo '"featured_img": "'.addslashes($apartment["featured_img"]).   '",';
 
-                        echo "'images': [";
+                        echo '"images": [';
 
+                        $is_first_image = true;
                         while($image = $images->fetch_assoc()){
-                            echo $image["apartment_imageid"].",";
+                            if(!$is_first_image){
+                                echo ",";
+                            }
+
+                            $is_first_image = false;
+                            echo $image["apartment_imageid"];
                         }
 
                         echo "]";
 
-                        //echo "images: [".$images."]";
-
-                        echo "},";
+                        echo "}";
                     }
 
                 ?>
@@ -247,17 +256,16 @@
 
     } else if ($type == "image"){
         $id = $conn->escape_string($_GET["id"]);
-        $send_text = $_GET["form"] == "text";
 
-        $data = $conn->query("SELECT * FROM attraction_images WHERE attraction_imageid='$id''");
+        $data = $conn->query("SELECT * FROM apartment_images WHERE apartment_imageid='$id'");
 
-        if($data->num_rows != 1){
+        if ($data->num_rows != 1){
             echo "Not found!";
             return;
         }
 
-        if(send_text){
-            $data->fetch_assoc()["imagetext"];
+        if (isset($_GET["form"]) && $_GET["form"] == "text"){
+            echo $data->fetch_assoc()["imagetext"];
         } else {
             header("Content-type: image");
             include($data->fetch_assoc()["path"]);
