@@ -449,9 +449,9 @@ function initSelectionSystem(){
                         // Slide down the correct tab
                         tab.slideDown();
 
-                        $('.selection-scroller').animate({
+                        /*$('.selection-scroller').animate({
                             scrollTop: tab.offset().top - 10
-                        });
+                        });*/
                     }
                 });
 
@@ -459,9 +459,9 @@ function initSelectionSystem(){
                 // Else just slide down the tab
                 tab.slideDown();
 
-                $('.selection-scroller').animate({
+                /*$('.selection-scroller').animate({
                     scrollTop: tab.offset().top - 10
-                });
+                });*/
             }
 
 
