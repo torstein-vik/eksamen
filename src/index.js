@@ -42,12 +42,79 @@ function loadUserData(){
 
         if(result.success){
 
+            $("#reservations").append("<h3> Brukerinfo: </h3>");
+            $("#reservations").append("<strong>Telefonnummer:</strong> " + result.userdata.phone + "<br>");
+            $("#reservations").append("<strong>Adresse:</strong> " + result.userdata.address + "<br><br>");
+            $("#reservations").append("<h3> Reservasjoner: </h3>");
+
+
+            if(result.reservations.length == 0){
+                $("#reservations").append("Ingen reservasjoner");
+            } else {
+                var reservations_div = $("<div class='selection' id='userreservations' group='userreservations'>");
+
+                $("#reservations").append(reservations_div);
+
+                result.reservations.forEach((reservation, index) => {
+                    var start = new Date(reservation.start * 1000);
+                    var end   = new Date(reservation.end   * 1000);
+
+                    var timediff = end.getTime() - start.getTime();
+                    var daydiff = Math.ceil(timediff / (1000 * 3600 * 24));
+                    var price = daydiff * reservation.price;
+
+                    reservations_div.append("<div for='userreservation"+index+"'> Leilighet " + reservation.apartmentnumber + " i " + start.toLocaleDateString("nb-NO", {month: "long"}) + " </div>");
+
+                    var div = $("<div class='selectionelement' for='userreservations' id='userreservation"+index+"'>");
+
+                    var date_format = {month: "long", day: "numeric", year: "numeric"}
+
+                    div.append("<strong>Leilighet:</strong> "+reservation.apartmentnumber+"<br>");
+                    div.append("<strong>Fra:</strong> "+start.toLocaleDateString("nb-NO", date_format)+"<br>");
+                    div.append("<strong>Til:</strong> "+  end.toLocaleDateString("nb-NO", date_format)+"<br>");
+                    div.append("<strong>Total pris:</strong> "+  price+"<br>");
+
+                    var cancel = $("<form><input type='submit' value='Avbestill'></form>");
+
+                    cancel.on('submit', (e) => {
+                        e.preventDefault();
+
+                        if(window.confirm("Er du sikker?")){
+                            $.ajax({
+                                url:"/api?type=deletereservation",
+                                method: "POST",
+                                data: {
+                                    reservationid: reservation.reservationid
+                                }
+                            }).done((json) => {
+                                var result = JSON.parse(json);
+
+                                if(result.success){
+                                    location.href = "/?page=reservations";
+                                } else {
+                                    alert(result.message);
+                                }
+                            });
+                        }
+                    });
+
+                    div.append(cancel);
+
+                    div.hide();
+
+                    $("#reservations").append(div);
+                });
+            }
 
 
         } else {
             $("#reservations").html("Du må være innlogget for å se dine reservasjoner.");
         }
+
+        def.resolve();
     });
+
+    return def;
 }
 
 function loadApartments(){
@@ -222,9 +289,7 @@ function loadLogin(){
                         var result = JSON.parse(json);
 
                         if(result.status == 1){
-
-                            loadLogin();
-                            loadUserData();
+                            location.href = "/?page=reservations";
                         } else {
                             alert("Error when logging out. Please try again");
                         }
@@ -271,8 +336,7 @@ function initLoginSystem(){
             var result = JSON.parse(json);
 
             if (result.success){
-                loadLogin();
-                $("#login-modal modalheader div").click();
+                location.href = "/?page=reservations";
             } else {
                 alert(result.message);
             }
@@ -308,8 +372,7 @@ function initRegisterSystem(){
             var result = JSON.parse(json);
 
             if (result.success){
-                loadLogin();
-                $("#register-modal modalheader div").click();
+                location.href = "/?page=reservations";
             } else {
                 alert(result.message);
             }
