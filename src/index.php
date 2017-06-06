@@ -85,6 +85,10 @@
     <modal id="register-modal" title="Registrer deg">
         <form id="register">
             <input type="text" id="username" placeholder="Brukernavn" required>
+            <input type="text" id="address" placeholder="Adresse" required>
+            <input type="text" id="postnum" placeholder="Postnummer" oninput="fetchPoststed(this.value, (s) => $('#poststed').html(s))" required>
+            <div id="poststed"> Postnummeret er invalid</div>
+            <input type="text" id="phonenum" placeholder="Telefonnummer" required>
             <input type="password" id="password1" placeholder="Passord" required>
             <input type="password" id="password2" placeholder="Bekreft passord" required>
             <input type="submit" id="name" value="Registrer deg!">

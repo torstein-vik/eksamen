@@ -326,3 +326,12 @@ input[type='submit']{
     margin: 10px;
     width: calc(100% - 20px);
 }
+
+#poststed{
+    text-align: center;
+    padding: 10px;
+
+    border-radius: 0 0 10px 10px;
+
+    background-color: $theme1;
+}

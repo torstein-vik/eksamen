@@ -42,7 +42,7 @@ function loadApartments(){
 
             var div = $("<div id='apartment"+apartment.id+"' for='apartments' class='selectionelement'>");
 
-
+            div.append("<h3> Leilighet "+apartment.number+" </h3>")
 
             $("#reserve").append(div);
 
@@ -138,8 +138,11 @@ function initRegisterSystem(){
     $("#register").on('submit', (e) => {
         e.preventDefault();
 
-        var username, password1, password2;
-        username = $("#register #username").val();
+        var username, address, postnum, phonenum, password1, password2;
+        username  = $("#register #username").val();
+        address   = $("#register #address").val();
+        postnum   = $("#register #postnum").val();
+        phonenum  = $("#register #phonenum").val();
         password1 = $("#register #password1").val();
         password2 = $("#register #password2").val();
 
@@ -147,7 +150,10 @@ function initRegisterSystem(){
             url: "api?type=register",
             method: "POST",
             data: {
-                username: username,
+                username:  username,
+                address:   address,
+                postnum:   postnum,
+                phonenum:  phonenum,
                 password1: password1,
                 password2: password2
             }
