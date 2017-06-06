@@ -322,11 +322,6 @@ input[type='submit']{
     text-align: center;
 }
 
-#apartments > div > img {
-    margin: 10px;
-    width: calc(100% - 20px);
-}
-
 #poststed{
     text-align: center;
     padding: 10px;
@@ -334,4 +329,21 @@ input[type='submit']{
     border-radius: 0 0 10px 10px;
 
     background-color: $theme1;
+}
+
+#apartments > div > img {
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+
+#reserve > .selectionelement {
+
+    h3, h4 {
+        text-align: center;
+    }
+
+    .apartmentimage > img{
+        width: 100%;
+        height: auto;
+    }
 }

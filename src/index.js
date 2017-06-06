@@ -38,18 +38,51 @@ function loadApartments(){
     }).done((json) => {
         var result = JSON.parse(json);
 
-        result.apartments.forEach((apartment) => {
+        apartmentDeferreds = [];
+
+        result.apartments.forEach((apartment, index) => {
+
+            var imageDeferreds = [];
 
             var div = $("<div id='apartment"+apartment.id+"' for='apartments' class='selectionelement'>");
 
-            div.append("<h3> Leilighet "+apartment.number+" </h3>")
+            div.append("<h3> Leilighet "+apartment.number+" </h3>");
+
+            div.append("<p> "+apartment.description+" </p>");
+
+            div.append("<h4> Bilder </h4>");
+
+            var image_selection = $("<div class='selection' id='images"+apartment.id+"' group='images"+apartment.id+"'> </div>");
+
+            div.append(image_selection);
+
+            apartment.images.forEach((image, index) => {
+                imageDeferreds[index] = new $.Deferred;
+
+                var image_button = $("<div for='image"+apartment.id+"-"+index+"' > </div>");
+
+                image_selection.append(image_button);
+                div.append("<div class='selectionelement apartmentimage' for='images"+apartment.id+"' id='image"+apartment.id+"-"+index+"'> <img src='api?type=image&id="+image+"'> </div>");
+
+                $.ajax({
+                    url: "/api?type=image&id="+image+"&form=text"
+                }).done((res) => {
+                    image_button.html(res);
+
+                    imageDeferreds[index].resolve();
+                });
+            });
 
             $("#reserve").append(div);
 
             $("#apartments").append("<div for='apartment"+apartment.id+"'> <img src='/api?type=image&id="+apartment.featured_img+"'> Leilighet "+apartment.number+" </div>");
+
+            apartmentDeferreds[index] = $.when.apply($, imageDeferreds);
         });
 
-        def.resolve();
+        $.when.apply($, apartmentDeferreds).done(() => {
+            def.resolve();
+        });
     });
 
     return def;
