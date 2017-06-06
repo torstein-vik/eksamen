@@ -210,6 +210,13 @@
             <?php
             return;
         }
+    } else if ($type == "apartments"){
+        $apartments = $conn->query("SELECT * FROM apartments, apartment_images WHERE apartments.appertmentid = apartment_images.apartmentid");
+
+
+    } else if ($type == "image"){
+
+
     }
 
 

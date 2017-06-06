@@ -27,7 +27,20 @@ $(function(){
 });
 
 function load(){
-    return $.when(loadLogin());
+    return $.when(loadLogin(), loadApartments());
+}
+
+function loadApartments(){
+    var def = new $.Deferred();
+
+    $.ajax({
+        url: "api?type=apartments"
+    }).done((json) => {
+        var result= JSON.parse(json);
+
+    });
+
+    return def;
 }
 
 function loadLogin(){
