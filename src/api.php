@@ -231,8 +231,9 @@
                     while($apartment = $apartments->fetch_assoc()){
                         if(!$is_first_apartment){
                             echo ",";
+                        } else {
+                            $is_first_apartment = false;
                         }
-                        $is_first_apartment = false;
 
                         $images = $conn->query("SELECT apartment_imageid FROM apartment_images WHERE apartmentid='".$apartment["apartmentid"]."'");
 
@@ -250,9 +251,10 @@
                         while($image = $images->fetch_assoc()){
                             if(!$is_first_image){
                                 echo ",";
+                            } else {
+                                $is_first_image = false;
                             }
 
-                            $is_first_image = false;
                             echo $image["apartment_imageid"];
                         }
 
@@ -282,6 +284,88 @@
             header("Content-type: image");
             include($data->fetch_assoc()["path"]);
         }
+    } else if ($type == "reserve") {
+
+        if(!$auth){
+            ?>
+            {
+                "success": false,
+                "message": "Vennligst logg inn før du reserverer"
+            }
+            <?php
+            return;
+        }
+
+        $userid = $_SESSION["userid"];
+
+        foreach(["date_start", "date_end"] as $index){
+            if(!(isset($_POST[$index]) && $_POST[$index] != "")){
+
+                ?>
+                {
+                    "success": false,
+                    "message": "Vennligst fyll ut alle feltene"
+                }
+                <?php
+                return;
+
+            } else {
+                $$index = $conn->escape_string($_POST[$index]);
+            }
+        }
+
+        if(!($date_start < $date_end)){
+            ?>
+            {
+                "success": false,
+                "message": "Startdato må være før sluttdato"
+            }
+            <?php
+            return;
+        }
+
+        if(!($date_start < time())){
+            ?>
+            {
+                "success": false,
+                "message": "Startdato må være i framtiden"
+            }
+            <?php
+            return;
+        }
+
+
+
+    } else if ($type == "reservations"){
+        $id = $conn->escape_string($_GET["id"]);
+
+        $data = $conn->query("SELECT * FROM reservations WHERE apartmentid='$id'");
+
+        ?>
+        {
+            "reservations":[
+                <?php
+                    $is_first_reservation = true;
+                    while($reservation = $data->fetch_assoc()){
+                        if(!$is_first_reservation){
+                            echo ",";
+                        } else {
+                            $is_first_reservation = false;
+                        }
+
+
+                        echo "{";
+
+                        echo '"start": "'.$reservation["date_start"].'",';
+                        echo '"end": "'.  $reservation["date_end"]  .'"';
+
+                        echo "}";
+                    }
+
+                ?>
+            ]
+        }
+        <?php
     }
 
 
