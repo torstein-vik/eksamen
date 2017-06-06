@@ -211,12 +211,57 @@
             return;
         }
     } else if ($type == "apartments"){
-        $apartments = $conn->query("SELECT * FROM apartments, apartment_images WHERE apartments.appertmentid = apartment_images.apartmentid");
+        $apartments = $conn->query("SELECT * FROM apartments");
 
+        ?>
+        {
+            "apartments":[
+                <?php
+
+                    while($apartment = $apartments->fetch_assoc()){
+                        $images = $conn->query("SELECT apartment_imageid FROM apartment_images WHERE apartmentid='".$apartment["apartmentid"]."'");
+
+                        echo "{";
+
+                        echo "'number': '".$apartment["apartmentnumber"]."',";
+                        echo "'description': '".$apartment["description"]."',";
+                        echo "'featured_img': '".$apartment["featured_img"]."',";
+
+                        echo "'images': [";
+
+                        while($image = $images->fetch_assoc()){
+                            echo $image["apartment_imageid"].",";
+                        }
+
+                        echo "]";
+
+                        //echo "images: [".$images."]";
+
+                        echo "},";
+                    }
+
+                ?>
+            ]
+        }
+        <?php
 
     } else if ($type == "image"){
+        $id = $conn->escape_string($_GET["id"]);
+        $send_text = $_GET["form"] == "text";
 
+        $data = $conn->query("SELECT * FROM attraction_images WHERE attraction_imageid='$id''");
 
+        if($data->num_rows != 1){
+            echo "Not found!";
+            return;
+        }
+
+        if(send_text){
+            $data->fetch_assoc()["imagetext"];
+        } else {
+            header("Content-type: image");
+            include($data->fetch_assoc()["path"]);
+        }
     }
 
 
