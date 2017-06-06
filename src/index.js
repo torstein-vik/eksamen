@@ -36,8 +36,20 @@ function loadApartments(){
     $.ajax({
         url: "api?type=apartments"
     }).done((json) => {
-        var result= JSON.parse(json);
+        var result = JSON.parse(json);
 
+        result.apartments.forEach((apartment) => {
+
+            var div = $("<div id='apartment"+apartment.id+"' for='apartments' class='selectionelement'>");
+
+
+
+            $("#reserve").append(div);
+
+            $("#apartments").append("<div for='apartment"+apartment.id+"'> <img src='/api?type=image&id="+apartment.featured_img+"'> Leilighet "+apartment.number+" </div>");
+        });
+
+        def.resolve();
     });
 
     return def;

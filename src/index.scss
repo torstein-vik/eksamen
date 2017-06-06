@@ -322,4 +322,7 @@ input[type='submit']{
     text-align: center;
 }
 
-
+#apartments > div > img {
+    margin: 10px;
+    width: calc(100% - 20px);
+}

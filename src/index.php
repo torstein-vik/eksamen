@@ -55,7 +55,9 @@
                 </div>
                 <div id="reserve" for="subject" class="selectionelement">
 
+                    <div class="selection" id="apartments" group="apartments">
 
+                    </div>
 
                 </div>
                 <div id="reservations" for="subject" class="selectionelement">
