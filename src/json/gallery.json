@@ -6,7 +6,7 @@ var gallery = [
         "path": "res/apartment2b.jpg",
         "text": "Leilighet 102"
     },{
-        "path": "res/apartment3c.jpg",
+        "path": "res/apartment3a.jpg",
         "text": "Leilighet 201"
     }
 ]
