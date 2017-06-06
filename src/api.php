@@ -102,20 +102,34 @@
         return;
 
     } else if ($type == "register"){
-        $username = $_POST["username"];
-        $password1 = $_POST["password1"];
-        $password2 = $_POST["password2"];
 
-        if(!(isset($username) && $username != "" && isset($password1) && $password1 != "" && isset($password2) && $password2 != "")){
+        foreach(["username", "address", "postnum", "phonenum", "password1", "password2"] as $index){
+            if(!(isset($_POST[$index]) && $_POST[$index] != "")){
 
+                ?>
+                {
+                    "success": false,
+                    "message": "Vennligst fyll ut alle feltene"
+                }
+                <?php
+                return;
+
+            } else {
+                $$index = $conn->escape_string($_POST[$index]);
+            }
+        }
+
+
+        $postnum_ok = $conn->query("SELECT * FROM poststed WHERE postnummer = '$postnum'")->num_rows == 1;
+
+        if(!$postnum_ok){
             ?>
             {
                 "success": false,
-                "message": "Vennligst fyll ut alle feltene"
+                "message": "Postnummeret er invalid!"
             }
             <?php
             return;
-
         }
 
         if($password1 != $password2){
@@ -127,10 +141,6 @@
             <?php
             return;
         }
-
-        $username  = $conn->escape_string($username);
-        $password1 = $conn->escape_string($password1);
-        $password2 = $conn->escape_string($password2);
 
         $username_ok = $conn->query("SELECT * FROM users WHERE username = '$username'")->num_rows == 0;
 
@@ -150,7 +160,7 @@
 
         $privilege = "'user'";
 
-        $query = $conn->query("INSERT INTO `users`  (username, passhash, passsalt, privilege) VALUES ('".$username."',0x".$hash.",0x".$salt.",".$privilege.");");
+        $query = $conn->query("INSERT INTO `users`  (username, address, postnummer, telefonnummer, passhash, passsalt, privilege) VALUES ('$username', '$address', '$postnum', '$phonenum',0x$hash,0x$salt,$privilege);");
 
         if($query){
             $userid = $conn->query("SELECT userid FROM users WHERE username = '".$username."'")->fetch_assoc();
