@@ -28,11 +28,15 @@ ENGINE = InnoDB;
 -- Apartment table
 CREATE TABLE IF NOT EXISTS `apartments` (
   `apartmentid` INT NOT NULL AUTO_INCREMENT,
-  `apartmentnumber` CHAR(4) NOT NULL,
-  PRIMARY KEY (`apartmentid`))
+  `apartmentnumber` CHAR(3) NOT NULL,
+  `description` TEXT NOT NULL,
+  `featured_img` INT NOT NULL,
+  PRIMARY KEY (`apartmentid`),
+  FOREIGN KEY (`featured_img`)
+    REFERENCES `apartment_images` (`apartment_imageid`))
 ENGINE = InnoDB;
 
--- Apartment image table
+-- image table
 CREATE TABLE IF NOT EXISTS `apartment_images` (
   `apartment_imageid` INT NOT NULL AUTO_INCREMENT,
   `apartmentid` INT NOT NULL,
