@@ -149,13 +149,13 @@ function loadURL(url){
             $("#home").show();
             $("#subject > div[for=home]").addClass("active");
             break;
-        case "products":
-            $("#products").show();
-            $("#subject > div[for=products]").addClass("active");
+        case "reserve":
+            $("#reserve").show();
+            $("#subject > div[for=reserve]").addClass("active");
             break;
         case "cart":
-            $("#finish").show();
-            $("#subject > div[for=finish]").addClass("active");
+            $("#reservations").show();
+            $("#subject > div[for=reservations]").addClass("active");
             break;
         default:
             $("#404page").show();

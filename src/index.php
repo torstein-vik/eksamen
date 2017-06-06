@@ -1,10 +1,10 @@
 <html>
     <head>
-        <title>Eksamen</title>
+        <title>Volsdalspause</title>
         <meta charset="utf-8" />
 
-        <meta name="description" content="Beskrivelse">
-        <meta name="keywords" content="stikkord,stikkord">
+        <meta name="description" content="Ta en pause fra bymaset i våre koslige rimlige leiligheter!">
+        <meta name="keywords" content="ferie, rolig, pause, volsdalen, volsdal, volsdalspause, reserver, reservasjon">
         <meta name="author" content="Torstein Vik">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,14 +30,14 @@
         <div id="header">
 
 
-            <h1 class="title" id="title"> Eksamen </h1>
+            <h1 class="title" id="title"> Volsdalspause </h1>
             <div id="usernav">
             </div>
 
             <div class="selection" id="subject" group="subject">
                 <div for="home">Hjem</div>
-                <div for="products">Side 1</div>
-                <div for="finish">Side 2</div>
+                <div for="reserve">Reserver</div>
+                <div for="reservations">Mine reservasjoner</div>
             </div>
         </div>
         <div id="global" class="selection-scroller">
@@ -52,12 +52,12 @@
                     Tekst
 
                 </div>
-                <div id="products" for="subject" class="selectionelement">
+                <div id="reserve" for="subject" class="selectionelement">
 
 
 
                 </div>
-                <div id="finish" for="subject" class="selectionelement">
+                <div id="reservations" for="subject" class="selectionelement">
 
 
 
