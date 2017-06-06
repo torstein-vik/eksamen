@@ -1,0 +1,32 @@
+
+-- SQL script for adding content
+
+-- If you get Error Code 1175, Go to Edit -> Preferences -> "SQL Editor" -> "Other" -> uncheck "Safe Updates". Then go to Query -> Reconnect to Server
+
+USE `eksamen`;
+
+-- Disable foreign key checks until later
+SET FOREIGN_KEY_CHECKS=0;
+
+-- Deleting all previous entries
+DELETE FROM `apartments`;
+DELETE FROM `apartment_images`;
+
+
+INSERT INTO apartments (apartmentnumber, description, featured_img) VALUES
+('101', 'Fantastisk utsikt over fjorden', '1'),
+('202', 'Fantastisk utsikt over fjorden 2', '4'),
+('303', 'Fantastisk utsikt over fjorden 3', '6');
+
+
+INSERT INTO apartment_images (apartmentid, path, imagetext) VALUES
+('1', 'res/placeholder.png', 'Placeholder 123'),
+('1', 'res/placeholder.png', 'Placeholder 321'),
+('2', 'res/placeholder.png', 'Placeholder 1234'),
+('2', 'res/placeholder.png', 'Placeholder 4321'),
+('3', 'res/placeholder.png', 'Placeholder 12345'),
+('3', 'res/placeholder.png', 'Placeholder 54321');
+
+
+-- Reenable foreign key checks
+SET FOREIGN_KEY_CHECKS=1;

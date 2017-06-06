@@ -1,0 +1,49 @@
+{
+    "apartments":[
+        {
+            "number": 101,
+            "featured": 0,
+            "description": "Fantastisk utsikt over fjorden",
+            "images": [
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 123"
+                },
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 321"
+                }
+            ]
+        },
+        {
+            "number": 202,
+            "featured": 1,
+            "description": "Fantastisk utsikt over fjorden 2",
+            "images": [
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 1234"
+                },
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 4321"
+                }
+            ]
+        },
+        {
+            "number": 303,
+            "featured": 1,
+            "description": "Fantastisk utsikt over fjorden 3",
+            "images": [
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 12345"
+                },
+                {
+                    "path":"res/placeholder.png",
+                    "text":"Placeholder 54321"
+                }
+            ]
+        }
+    ]
+}
