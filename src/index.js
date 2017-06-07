@@ -93,6 +93,7 @@ function loadUserData(){
 
                                 if(result.success){
                                     div.slideUp().promise().done(loadUserData);
+                                    loadReservationsFor(reservation.apartmentid);
                                 } else {
                                     alert(result.message);
                                 }
@@ -221,6 +222,7 @@ function loadApartments(){
                     if (result.success){
                         $("#order > *[for='reserve-"+apartment.id+"']").click();
                         loadUserData();
+                        loadReservationsFor(apartment.id);
                     } else {
                         alert(result.message);
                     }
@@ -229,32 +231,16 @@ function loadApartments(){
 
             order.append(order_form);
 
-            order.append("<h4> Tidligere reservasjoner: </h4>")
-
-            $.ajax({
-                url: "api?type=reservations&id="+apartment.id
-            }).done((json) => {
-                var result = JSON.parse(json);
-
-                if(result.reservations.length == 0){
-                    order.append("Det er ingen reservasjoner på denne leiligheten!");
-                } else {
-                    result.reservations.forEach((reservation) => {
-                        var start = new Date(reservation.start * 1000).toISOString().substring(0, 10);
-                        var end   = new Date(reservation.end * 1000).toISOString().substring(0, 10);
-
-                        order.append("Fra " + start + " til " + end + "<br>");
-                    });
-                }
-
-                reservationDeferred.resolve();
-            });
+            order.append("<h4> Tidligere reservasjoner: </h4>");
+            order.append("<div id='pastreservations"+apartment.id+"'> </div>")
 
             div.append(order);
 
             $("#reserve").append(div);
 
             $("#apartments").append("<div for='apartment"+apartment.id+"'> <img src='/api?type=image&id="+apartment.featured_img+"'> Leilighet "+apartment.number+" </div>");
+
+            loadReservationsFor(apartment.id).done(reservationDeferred.resolve);
 
             apartmentDeferreds[index] = $.when.apply($, [reservationDeferred].concat(imageDeferreds));
         });
@@ -265,6 +251,37 @@ function loadApartments(){
     });
 
     return def;
+}
+
+function loadReservationsFor(apartmentid){
+    var reservationDeferred = new $.Deferred();
+
+    var date_format = {month: "long", day: "numeric", year: "numeric"}
+
+    $.ajax({
+        url: "api?type=reservations&id="+apartmentid
+    }).done((json) => {
+        var result = JSON.parse(json);
+
+        var div = $("#pastreservations" + apartmentid);
+
+        div.html("");
+
+        if(result.reservations.length == 0){
+            div.html("Det er ingen reservasjoner på denne leiligheten!");
+        } else {
+            result.reservations.forEach((reservation) => {
+                var start = new Date(reservation.start * 1000).toLocaleDateString("nb-NO", date_format);
+                var end   = new Date(reservation.end * 1000).toLocaleDateString("nb-NO", date_format);
+
+                div.append("Fra " + start + " til " + end + "<br>");
+            });
+        }
+
+        reservationDeferred.resolve();
+    });
+
+    return reservationDeferred;
 }
 
 function loadLogin(){
