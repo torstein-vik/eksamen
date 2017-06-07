@@ -63,11 +63,13 @@ function loadUserData(){
                     var daydiff = Math.ceil(timediff / (1000 * 3600 * 24));
                     var price = daydiff * reservation.price;
 
-                    reservations_div.append("<div for='userreservation"+index+"'> Leilighet " + reservation.apartmentnumber + " i " + start.toLocaleDateString("nb-NO", {month: "long"}) + " </div>");
+                    //reservations_div.append("<div for='userreservation"+index+"'> Leilighet " + reservation.apartmentnumber + " i " + start.toLocaleDateString("nb-NO", {month: "long"}) + " </div>");
 
-                    var div = $("<div class='selectionelement' for='userreservations' id='userreservation"+index+"'>");
+                    var div = $("<div class='reservationdiv' for='userreservations' id='userreservation"+index+"'>");
 
                     var date_format = {month: "long", day: "numeric", year: "numeric"}
+
+                    div.append("<h2> Leilighet " + reservation.apartmentnumber + " i " + start.toLocaleDateString("nb-NO", {month: "long"}) + "</h2>");
 
                     div.append("<strong>Leilighet:</strong> "+reservation.apartmentnumber+"<br>");
                     div.append("<strong>Fra:</strong> "+start.toLocaleDateString("nb-NO", date_format)+"<br>");
@@ -90,7 +92,7 @@ function loadUserData(){
                                 var result = JSON.parse(json);
 
                                 if(result.success){
-                                    location.href = "/?page=reservations";
+                                    div.slideUp().promise().done(loadUserData);
                                 } else {
                                     alert(result.message);
                                 }
@@ -100,7 +102,6 @@ function loadUserData(){
 
                     div.append(cancel);
 
-                    div.hide();
 
                     $("#reservations").append(div);
                 });
@@ -219,6 +220,7 @@ function loadApartments(){
 
                     if (result.success){
                         $("#order > *[for='reserve-"+apartment.id+"']").click();
+                        loadUserData();
                     } else {
                         alert(result.message);
                     }
@@ -289,7 +291,8 @@ function loadLogin(){
                         var result = JSON.parse(json);
 
                         if(result.status == 1){
-                            location.href = "/?page=reservations";
+                            loadLogin();
+                            loadUserData();
                         } else {
                             alert("Error when logging out. Please try again");
                         }
@@ -336,7 +339,9 @@ function initLoginSystem(){
             var result = JSON.parse(json);
 
             if (result.success){
-                location.href = "/?page=reservations";
+                loadLogin();
+                loadUserData();
+                $("#login-modal modalheader > div").click();
             } else {
                 alert(result.message);
             }
@@ -372,7 +377,9 @@ function initRegisterSystem(){
             var result = JSON.parse(json);
 
             if (result.success){
-                location.href = "/?page=reservations";
+                loadLogin();
+                loadUserData();
+                $("#register-modal modalheader > div").click();
             } else {
                 alert(result.message);
             }

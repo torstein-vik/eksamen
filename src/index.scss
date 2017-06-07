@@ -187,6 +187,15 @@ h1{
     overflow: hidden;
 }
 
+.reservationdiv{
+    margin: 10px auto;
+    box-shadow: 0px 1px 3px darkslategray;
+    width: calc(100% - 40px);
+
+    padding: 20px;
+    overflow: hidden;
+}
+
 .selectionelement[for='subject']{
     max-width: 720px;
 }
