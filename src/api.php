@@ -435,6 +435,7 @@
                         echo "{";
 
                         echo '"reservationid": "'.  $reservation["reservationid"]             .'",';
+                        echo '"apartmentid": "'.    $reservation["apartmentid"]               .'",';
                         echo '"start": "'.          $reservation["UNIX_TIMESTAMP(date_start)"].'",';
                         echo '"end": "'.            $reservation["UNIX_TIMESTAMP(date_end)"]  .'",';
                         echo '"apartmentnumber": "'.$reservation["apartmentnumber"]           .'",';
